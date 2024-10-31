@@ -83,5 +83,11 @@ Contributions are welcome! Please follow these steps:
 4. Push to the branch: `git push origin feature/AmazingFeature`
 5. Open a pull request.
 
+#server deployed url - 
+```
+https://chat-server-ss3r.onrender.com
+```
+-its deployed in render so its take some time to render database calls
+
 ## License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
