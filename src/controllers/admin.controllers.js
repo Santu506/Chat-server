@@ -6,6 +6,7 @@ import { User } from "../models/user.models.js";
 import { ErrorHandler } from "../utils/utility.utils.js";
 import { cookieOptions } from "../utils/features.utils.js";
 import { adminSecretKey } from "../app.js";
+import CryptoJS from "crypto-js";
 
 const adminLogin = TryCatch(async (req, res, next) => {
   const { secretKey } = req.body;
@@ -129,10 +130,23 @@ const allMessages = TryCatch(async (req, res) => {
       },
     })
   );
+  
+  let encryptedMessages ;
+    encryptedMessages= transformedMessages.map((message) => {
+      const encryptedContent = CryptoJS.AES.encrypt(
+        message.content,
+        process.env.ENCRYPTION_KEY
+      ).toString();
+      return { ...message, content: encryptedContent };
+    });
+  
+
+  // console.log(encryptedMessages);s
+  
 
   return res.status(200).json({
     success: true,
-    messages: transformedMessages,
+    messages: encryptedMessages,
   });
 });
 
